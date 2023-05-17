@@ -12,12 +12,14 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const discord_js_1 = require("discord.js");
 module.exports = {
     data: new discord_js_1.SlashCommandBuilder()
-        .setName('ping')
-        .setDescription('Replies with Pong!'),
+        .setName('account')
+        .setDescription('Edit your account information!')
+        .addSubcommand(c => c.setName("verify").setDescription("Adds a new account to your user").addStringOption(o => o.setName("name").setDescription("Your roblox account").setRequired(true)))
+        .addSubcommand(c => c.setName("unverify").setDescription("Logs out account."))
+        .addSubcommand(c => c.setName("switch-account").setDescription("Switch roblox account.")),
     execute(interaction) {
         return __awaiter(this, void 0, void 0, function* () {
-            yield interaction.reply('Pong!');
         });
     },
 };
-//# sourceMappingURL=ping.js.map
+//# sourceMappingURL=account.js.map

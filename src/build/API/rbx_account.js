@@ -9,15 +9,25 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const discord_js_1 = require("discord.js");
-module.exports = {
-    data: new discord_js_1.SlashCommandBuilder()
-        .setName('ping')
-        .setDescription('Replies with Pong!'),
-    execute(interaction) {
-        return __awaiter(this, void 0, void 0, function* () {
-            yield interaction.reply('Pong!');
-        });
-    },
-};
-//# sourceMappingURL=ping.js.map
+const axios = require('axios');
+function checkUserExists(username) {
+    return __awaiter(this, void 0, void 0, function* () {
+        try {
+            const response = yield axios.get(`https://api.roblox.com/users/get-by-username?username=${username}`);
+            const data = response.data;
+            if (data.Id) {
+                return true;
+            }
+            else {
+                return false;
+            }
+        }
+        catch (error) {
+            console.error(error);
+            return false;
+        }
+    });
+}
+const username = 'example_username';
+checkUserExists(username);
+//# sourceMappingURL=rbx_account.js.map
